@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { CloseIcon, ChevronDownIcon } from "@/components/shared/icons";
@@ -20,7 +21,7 @@ export function MobileNav({
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -60,7 +61,7 @@ export function MobileNav({
             className="grid overflow-hidden transition-[grid-template-rows] duration-300 ease-out"
             style={{ gridTemplateRows: categoriesExpanded ? "1fr" : "0fr" }}
           >
-            <div className="overflow-hidden">
+            <div>
               <div className="flex flex-col items-center gap-4 pt-6">
                 {categories.map((category) => (
                   <Link
@@ -81,6 +82,7 @@ export function MobileNav({
           צור קשר
         </Link>
       </nav>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }
