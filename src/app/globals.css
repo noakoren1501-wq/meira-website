@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand-black: #111111;
+  --color-brand-white: #ffffff;
+  --color-brand-gray: #e4e4e2;
+  --color-brand-gray-dark: #6e6e6a; /* ~5.1:1 on white, passes WCAG AA for body text */
+}
+
+@theme inline {
+  --color-brand-black: var(--color-brand-black);
+  --color-brand-white: var(--color-brand-white);
+  --color-brand-gray: var(--color-brand-gray);
+  --color-brand-gray-dark: var(--color-brand-gray-dark);
+  --font-sans: var(--font-rubik);
+}
+
+body {
+  background: var(--color-brand-white);
+  color: var(--color-brand-black);
+}
+
+::selection {
+  background: var(--color-brand-black);
+  color: var(--color-brand-white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-black);
+  outline-offset: 3px;
+}
