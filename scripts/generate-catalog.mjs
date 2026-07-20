@@ -171,7 +171,7 @@ async function main() {
         id: productId,
         slug: productSlug,
         categorySlug,
-        title: productTitle,
+        title: priorProduct?.title ?? productTitle,
         shortDescription: priorProduct?.shortDescription ?? PLACEHOLDERS.shortDescription,
         fullDescription: priorProduct?.fullDescription ?? PLACEHOLDERS.fullDescription,
         price: priorProduct?.price ?? PLACEHOLDERS.price,
@@ -192,7 +192,7 @@ async function main() {
     categories.push({
       id: categoryId,
       slug: categorySlug,
-      title: categoryTitle,
+      title: priorCategory?.title ?? categoryTitle,
       description: priorCategory?.description ?? PLACEHOLDERS.categoryDescription,
       coverImage: priorCategory?.coverImage ?? categoryCoverImage,
       featured: priorCategory?.featured ?? true,
