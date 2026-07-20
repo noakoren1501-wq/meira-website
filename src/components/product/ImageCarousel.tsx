@@ -11,11 +11,13 @@ import type { ProductImage } from "@/lib/types";
 interface ImageCarouselProps {
   images: ProductImage[];
   productTitle: string;
+  /** Show each image at its own natural aspect ratio instead of the fixed site-wide box. */
+  naturalAspectRatio?: boolean;
 }
 
 const SWIPE_THRESHOLD = 40;
 
-export function ImageCarousel({ images, productTitle }: ImageCarouselProps) {
+export function ImageCarousel({ images, productTitle, naturalAspectRatio }: ImageCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -41,7 +43,11 @@ export function ImageCarousel({ images, productTitle }: ImageCarouselProps) {
   return (
     <div role="group" aria-roledescription="קרוסלת תמונות" aria-label={productTitle}>
       <div
-        className="relative aspect-square w-full overflow-hidden rounded-2xl bg-brand-gray/40 sm:aspect-[4/5]"
+        className={clsx(
+          "relative w-full overflow-hidden rounded-2xl bg-brand-gray/40",
+          !naturalAspectRatio && "aspect-square sm:aspect-[4/5]"
+        )}
+        style={naturalAspectRatio ? { aspectRatio: `${activeImage.width} / ${activeImage.height}` } : undefined}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

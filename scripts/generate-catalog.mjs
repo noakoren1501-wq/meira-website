@@ -181,6 +181,7 @@ async function main() {
         coverImage: images[0].src,
         featured: priorProduct?.featured ?? false,
         whatsappProductName: priorProduct?.whatsappProductName ?? productTitle,
+        ...(priorProduct?.naturalAspectRatio !== undefined && { naturalAspectRatio: priorProduct.naturalAspectRatio }),
       };
       products.push(product);
 

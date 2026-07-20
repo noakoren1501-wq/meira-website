@@ -62,7 +62,11 @@ export default async function ProductPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Breadcrumbs items={breadcrumbItems} />
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <ImageCarousel images={product.images} productTitle={product.title} />
+        <ImageCarousel
+          images={product.images}
+          productTitle={product.title}
+          naturalAspectRatio={product.naturalAspectRatio}
+        />
         <ProductDetails product={product} category={category} />
       </div>
       <ProductNavigation categorySlug={categorySlug} previous={previous} next={next} />

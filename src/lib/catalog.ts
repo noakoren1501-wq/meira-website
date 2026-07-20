@@ -24,6 +24,7 @@ const productSchema = z
     coverImage: z.string().min(1),
     featured: z.boolean(),
     whatsappProductName: z.string().min(1),
+    naturalAspectRatio: z.boolean().optional(),
   })
   .refine((product) => product.salePrice === null || (product.price !== null && product.salePrice < product.price), {
     message: "salePrice must be null unless price is set and salePrice is lower than price",

@@ -19,6 +19,10 @@ export interface Product {
   coverImage: string;
   featured: boolean;
   whatsappProductName: string;
+  /** When true, the product-page gallery shows each image at its own natural aspect
+   * ratio instead of the site-wide fixed box — for products whose photos shouldn't be
+   * letterboxed/cropped to match. Card grids elsewhere are unaffected. */
+  naturalAspectRatio?: boolean;
 }
 
 export interface Category {
