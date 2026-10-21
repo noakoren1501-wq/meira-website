@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import { siteConfig } from "@/lib/data/site-config";
 import { getAllCategories } from "@/lib/catalog";
+import { buildSiteJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsAppButton } from "@/components/shared/FloatingWhatsAppButton";
@@ -21,6 +22,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.siteName}`,
   },
   description: siteConfig.seo.defaultDescription,
+  applicationName: siteConfig.siteName,
+  keywords: [siteConfig.siteName, siteConfig.siteTagline, "שלטי עץ", "שלטים ממוסגרים", "ציורים מקוריים", "יצירה בעבודת יד"],
+  robots: { index: true, follow: true },
   openGraph: {
     title: siteConfig.seo.defaultTitle,
     description: siteConfig.seo.defaultDescription,
@@ -40,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl" className={`${rubik.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSiteJsonLd()) }} />
         <Header categories={categories} />
         <main className="flex-1">{children}</main>
         <Footer />

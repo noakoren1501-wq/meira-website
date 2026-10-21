@@ -21,6 +21,12 @@ export function MobileNav({
 
   if (!open) return null;
 
+  // Always reopen with the categories list collapsed.
+  const close = () => {
+    setCategoriesExpanded(false);
+    onClose();
+  };
+
   return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
@@ -33,7 +39,7 @@ export function MobileNav({
       <div className="flex items-center justify-end px-6 py-5">
         <button
           type="button"
-          onClick={onClose}
+          onClick={close}
           aria-label="סגירת תפריט"
           className="rounded-full p-2 text-brand-black"
         >
@@ -41,33 +47,41 @@ export function MobileNav({
         </button>
       </div>
       <nav className="flex flex-1 flex-col items-center justify-center gap-8 pb-12">
-        <Link href="/" onClick={onClose} className="text-2xl font-light text-brand-black">
+        <Link href="/" onClick={close} className="text-2xl font-light text-brand-black">
           בית
         </Link>
 
         <div className="flex flex-col items-center">
-          <button
-            type="button"
-            onClick={() => setCategoriesExpanded((value) => !value)}
-            aria-expanded={categoriesExpanded}
-            className="flex items-center gap-2 text-2xl font-light text-brand-black"
-          >
-            קטגוריות
-            <ChevronDownIcon
-              className={clsx("h-5 w-5 transition-transform duration-300", categoriesExpanded && "rotate-180")}
-            />
-          </button>
+          <div className="flex items-center gap-1">
+            <Link href="/categories" onClick={close} className="text-2xl font-light text-brand-black">
+              קטגוריות
+            </Link>
+            <button
+              type="button"
+              onClick={() => setCategoriesExpanded((value) => !value)}
+              aria-expanded={categoriesExpanded}
+              aria-controls="mobile-nav-categories"
+              aria-label={categoriesExpanded ? "סגירת רשימת הקטגוריות" : "פתיחת רשימת הקטגוריות"}
+              className="rounded-full p-2 text-brand-black"
+            >
+              <ChevronDownIcon
+                className={clsx("h-5 w-5 transition-transform duration-300", categoriesExpanded && "rotate-180")}
+              />
+            </button>
+          </div>
           <div
-            className="grid overflow-hidden transition-[grid-template-rows] duration-300 ease-out"
+            id="mobile-nav-categories"
+            className="grid transition-[grid-template-rows] duration-300 ease-out"
             style={{ gridTemplateRows: categoriesExpanded ? "1fr" : "0fr" }}
           >
-            <div>
-              <div className="flex flex-col items-center gap-4 pt-6">
+            {/* min-h-0 + overflow-hidden lets the 0fr row actually collapse (grid items default to min-height:auto). */}
+            <div className="min-h-0 overflow-hidden" inert={!categoriesExpanded}>
+              <div className="flex flex-col items-center gap-4 pt-4">
                 {categories.map((category) => (
                   <Link
                     key={category.slug}
                     href={`/${category.slug}`}
-                    onClick={onClose}
+                    onClick={close}
                     className="text-lg font-light text-brand-gray-dark"
                   >
                     {category.title}
@@ -78,7 +92,7 @@ export function MobileNav({
           </div>
         </div>
 
-        <Link href="/contact" onClick={onClose} className="text-2xl font-light text-brand-black">
+        <Link href="/contact" onClick={close} className="text-2xl font-light text-brand-black">
           צור קשר
         </Link>
       </nav>

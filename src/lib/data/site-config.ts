@@ -27,10 +27,10 @@ export const siteConfig: SiteConfig = {
   },
 
   seo: {
-    defaultTitle: "מאירה קורן | יצירה בעבודת יד",
+    defaultTitle: "מאירה קורן – אחד יחיד ומיוחד | שלטי עץ ויצירות בעבודת יד",
     defaultDescription:
-      "קטלוג יצירות בעבודת יד מאת מאירה קורן — שלטי עץ, שלטים ממוסגרים, תמונות וציורים מקוריים.",
-    // TODO: replace with the real production domain once available.
-    siteUrl: "https://www.meirakoren.co.il",
+      "מאירה קורן – אחד יחיד ומיוחד. קטלוג יצירות בעבודת יד: שלטי עץ, שלטים ממוסגרים, תמונות וציורים מקוריים.",
+    // Live production domain. Update here (and in Google Search Console) if a custom domain is connected.
+    siteUrl: "https://meira-website.vercel.app",
   },
 };

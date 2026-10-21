@@ -7,6 +7,34 @@ export function absoluteUrl(path: string): string {
   return `${siteConfig.seo.siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+// Tells search engines the site's name, its alternate name (the tagline people also search for)
+// and who the creator is, so queries like "מאירה קורן" / "אחד יחיד ומיוחד" map to this site.
+export function buildSiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": absoluteUrl("/#website"),
+        url: absoluteUrl("/"),
+        name: siteConfig.siteName,
+        alternateName: [siteConfig.siteTagline, `${siteConfig.siteName} – ${siteConfig.siteTagline}`],
+        inLanguage: "he-IL",
+        publisher: { "@id": absoluteUrl("/#organization") },
+      },
+      {
+        "@type": "Organization",
+        "@id": absoluteUrl("/#organization"),
+        name: siteConfig.siteName,
+        alternateName: siteConfig.siteTagline,
+        url: absoluteUrl("/"),
+        logo: absoluteUrl("/icon.png"),
+        description: siteConfig.seo.defaultDescription,
+      },
+    ],
+  };
+}
+
 export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
   return {
     "@context": "https://schema.org",

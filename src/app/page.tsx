@@ -4,7 +4,13 @@ import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { FadeIn } from "@/components/shared/FadeIn";
+import type { Metadata } from "next";
 import { siteConfig } from "@/lib/data/site-config";
+
+export const metadata: Metadata = {
+  title: { absolute: siteConfig.seo.defaultTitle },
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
