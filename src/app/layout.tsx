@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.siteName,
   keywords: [siteConfig.siteName, siteConfig.siteTagline, "שלטי עץ", "שלטים ממוסגרים", "ציורים מקוריים", "יצירה בעבודת יד"],
   robots: { index: true, follow: true },
+  verification: { google: "DHRivOa_6ykZPPInno6Y4uYY8ttsGWoV234JiQPnPsU" },
   openGraph: {
     title: siteConfig.seo.defaultTitle,
     description: siteConfig.seo.defaultDescription,
